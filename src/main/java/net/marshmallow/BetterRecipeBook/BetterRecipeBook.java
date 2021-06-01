@@ -6,8 +6,14 @@ import net.fabricmc.api.ModInitializer;
 import net.marshmallow.BetterRecipeBook.Config.Config;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class BetterRecipeBook implements ModInitializer {
     public static int queuedScroll;
@@ -16,6 +22,8 @@ public class BetterRecipeBook implements ModInitializer {
     public static boolean isFilteringNone;
 
     public static Config config;
+
+    public static List<Identifier> favourites;
 
     @Override
     public void onInitialize() {
@@ -26,6 +34,8 @@ public class BetterRecipeBook implements ModInitializer {
         AutoConfig.register(Config.class, Toml4jConfigSerializer::new);
 
         config = AutoConfig.getConfigHolder(Config.class).getConfig();
+
+        favourites = Collections.singletonList(new Identifier("betterrecipebook:placeholder"));
     }
 
     public static void cheat(Item item) {
